@@ -1,12 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import App from './app';
+import Shop from './shop';
 
-describe('App', () => {
+describe('Shop', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<App />);
-
+    const { baseElement } = render(<Shop />);
     expect(baseElement).toBeTruthy();
   });
 });

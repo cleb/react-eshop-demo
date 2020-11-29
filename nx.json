@@ -32,6 +32,12 @@
     },
     "ui": {
       "tags": []
+    },
+    "shop": {
+      "tags": []
+    },
+    "product": {
+      "tags": []
     }
   }
 }

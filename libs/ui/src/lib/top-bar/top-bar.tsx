@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
 
 import './top-bar.scss';
 
@@ -9,8 +10,8 @@ export interface TopBarProps {}
 export function TopBar(props: TopBarProps) {
   return (
     <Navbar>
-      <Navbar.Brand href="/" title="Home">
-        Demo shop
+      <Navbar.Brand title="Home">
+        <Link to="/">Demo shop</Link>
       </Navbar.Brand>
     </Navbar>
   );

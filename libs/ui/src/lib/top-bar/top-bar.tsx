@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from 'react-bootstrap/Navbar';
 
 import './top-bar.scss';
 
@@ -7,9 +8,11 @@ export interface TopBarProps {}
 
 export function TopBar(props: TopBarProps) {
   return (
-    <header>
-      <a href="/" title="Home">Demo Shop</a> 
-    </header>
+    <Navbar>
+      <Navbar.Brand href="/" title="Home">
+        Demo shop
+      </Navbar.Brand>
+    </Navbar>
   );
 }
 

@@ -10,7 +10,7 @@ describe('TopBar', () => {
   });
 
   it('should have a link to home', () => {
-    const {getByTitle} = render(<TopBar />);
+    const { getByTitle } = render(<TopBar />);
 
     const homeHref = getByTitle('Home');
 

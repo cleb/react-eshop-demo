@@ -38,6 +38,9 @@
     },
     "product": {
       "tags": []
+    },
+    "eshop-api": {
+      "tags": []
     }
   }
 }

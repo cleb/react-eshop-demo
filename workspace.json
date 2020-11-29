@@ -51,7 +51,8 @@
         "serve": {
           "builder": "@nrwl/web:dev-server",
           "options": {
-            "buildTarget": "eshop-frontend:build"
+            "buildTarget": "eshop-frontend:build",
+            "proxyConfig": "apps/eshop-frontend/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -158,6 +159,56 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/product/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "eshop-api": {
+      "root": "apps/eshop-api",
+      "sourceRoot": "apps/eshop-api/src",
+      "projectType": "application",
+      "prefix": "eshop-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/eshop-api",
+            "main": "apps/eshop-api/src/main.ts",
+            "tsConfig": "apps/eshop-api/tsconfig.app.json",
+            "assets": ["apps/eshop-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/eshop-api/src/environments/environment.ts",
+                  "with": "apps/eshop-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "eshop-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/eshop-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/eshop-api/jest.config.js",
             "passWithNoTests": true
           }
         }

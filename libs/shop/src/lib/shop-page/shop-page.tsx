@@ -10,12 +10,16 @@ export interface ShopPageProps {
 
 export function ShopPage(props: ShopPageProps) {
   const { products } = props;
-  return products.map((product) => (
-    <ProductDisplaySmall
-      product={product}
-      key={product.id}
-    ></ProductDisplaySmall>
-  ));
+  return (
+    <>
+      {products.map((product) => (
+        <ProductDisplaySmall
+          product={product}
+          key={product.id}
+        ></ProductDisplaySmall>
+      ))}
+    </>
+  );
 }
 
 export default ShopPage;

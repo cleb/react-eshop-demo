@@ -1,16 +1,21 @@
 import React from 'react';
+import { ProductDisplaySmall, Product } from '@react-eshop-demo/product';
 
 import './shop.scss';
 
 /* eslint-disable-next-line */
-export interface ShopProps {}
+export interface ShopProps {
+  products: Array<Product>;
+}
 
 export function Shop(props: ShopProps) {
-  return (
-    <div>
-      <h1>Welcome to shop!</h1>
-    </div>
-  );
+  const { products } = props;
+  return products.map((product) => (
+    <ProductDisplaySmall
+      product={product}
+      key={product.id}
+    ></ProductDisplaySmall>
+  ));
 }
 
 export default Shop;

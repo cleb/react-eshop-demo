@@ -29,6 +29,9 @@
     "eshop-frontend-e2e": {
       "tags": [],
       "implicitDependencies": ["eshop-frontend"]
+    },
+    "ui": {
+      "tags": []
     }
   }
 }

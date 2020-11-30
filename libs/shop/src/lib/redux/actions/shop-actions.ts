@@ -7,13 +7,15 @@ import { Order } from '../state/shop-state';
 const api = new DefaultApi();
 
 export enum ShopActionTypes {
-  LOAD_PRODUCTS_SUCCESS = 'LOAD_PRODUCTS_SUCCESS',
-  LOAD_PRODUCTS = 'LOAD_PRODUCTS',
-  ADD_TO_BASKET = 'ADD_TO_BASKET',
-  PLACE_ORDER = 'PLACE_ORDER',
-  PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS',
-  LOAD_ORDERS = 'LOAD_ORDERS',
-  LOAD_ORDERS_SUCCESS = 'LOAD_ORDERS_SUCCESS',
+  LOAD_PRODUCTS_SUCCESS = '[SHOP] LOAD_PRODUCTS_SUCCESS',
+  LOAD_PRODUCTS = '[SHOP] LOAD_PRODUCTS',
+  ADD_TO_BASKET = '[SHOP] ADD_TO_BASKET',
+  PLACE_ORDER = '[SHOP] PLACE_ORDER',
+  PLACE_ORDER_SUCCESS = '[SHOP] PLACE_ORDER_SUCCESS',
+  LOAD_ORDERS = '[SHOP] LOAD_ORDERS',
+  LOAD_ORDERS_SUCCESS = '[SHOP] LOAD_ORDERS_SUCCESS',
+  LOAD_ORDER = '[SHOP] LOAD_ORDER',
+  LOAD_ORDER_SUCCESS = '[SHOP] LOAD_ORDER_SUCCESS',
 }
 
 export interface LoadProductsSuccessAction extends Action {
@@ -33,6 +35,10 @@ export interface LoadOrdersSuccessAction extends Action {
   orders: Array<Order>;
 }
 
+export interface LoadOrderSuccessAction extends Action {
+  order: Order;
+}
+
 type PlaceOrderSuccessAction = Action;
 
 export function loadProducts() {
@@ -47,6 +53,14 @@ export function loadOrders() {
   return (dispatch) => {
     api.ordersGet().then((res) => {
       dispatch(loadOrdersSuccess(res));
+    });
+  };
+}
+
+export function loadOrder(id: number) {
+  return (dispatch) => {
+    api.ordersIdGet(id).then((res) => {
+      dispatch(loadOrderSuccess(res));
     });
   };
 }
@@ -70,6 +84,13 @@ export function loadOrdersSuccess(orders): LoadOrdersSuccessAction {
   return {
     type: ShopActionTypes.LOAD_ORDERS_SUCCESS,
     orders: orders,
+  };
+}
+
+export function loadOrderSuccess(order): LoadOrderSuccessAction {
+  return {
+    type: ShopActionTypes.LOAD_ORDER_SUCCESS,
+    order: order,
   };
 }
 

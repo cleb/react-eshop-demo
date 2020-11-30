@@ -6,10 +6,12 @@ import {
   LoadProductsSuccessAction,
   AddToBasketAction,
   LoadOrdersSuccessAction,
+  LoadOrderSuccessAction,
 } from '../actions/shop-actions';
+import { Orders } from '../../orders/orders';
 
 export function shopReducer(
-  state: ShopState = { products: [], basket: [] },
+  state: ShopState = { products: [], basket: [], orders: [] },
   action: ShopAction
 ): ShopState {
   switch (action.type) {
@@ -33,6 +35,15 @@ export function shopReducer(
       return {
         ...state,
         orders: (action as LoadOrdersSuccessAction).orders,
+      };
+    case ShopActionTypes.LOAD_ORDER_SUCCESS:
+      return {
+        ...state,
+        orders: state.orders
+          .filter(
+            (order) => order.id !== (action as LoadOrderSuccessAction).order.id
+          )
+          .concat([(action as LoadOrderSuccessAction).order]),
       };
     default:
       return state;

@@ -15,7 +15,7 @@ export function OrderDetailPage(props: OrderDetailPageProps) {
     <>
       <h3>Items</h3>
       {order.items.map((item) => (
-        <ProductDisplaySmall product={item.product}>
+        <ProductDisplaySmall product={item.product} key={item.product.id}>
           <strong>Amount: {item.amount}</strong>
         </ProductDisplaySmall>
       ))}

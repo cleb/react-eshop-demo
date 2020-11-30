@@ -41,6 +41,19 @@ paths:
             type: array
             items:
               $ref: '#/definitions/OrderDto'
+  /orders/{id}:
+    get:
+      summary: Get an order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: number
+      responses:
+        '200':
+          description: 'Get order success'
+          schema:
+            $ref: '#/definitions/OrderDto'
 
 host: localhost:3333
 schemes:

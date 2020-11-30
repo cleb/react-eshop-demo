@@ -176,6 +176,35 @@ export const DefaultApiFetchParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Get an order
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ordersIdGet(id: number, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling ordersIdGet.');
+            }
+            const localVarPath = `/orders/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Place an order
          * @param {OrderDto} [order] 
          * @param {*} [options] Override http request option.
@@ -254,6 +283,25 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get an order
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ordersIdGet(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<OrderDto> {
+            const localVarFetchArgs = DefaultApiFetchParamCreator(configuration).ordersIdGet(id, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
          * @summary Place an order
          * @param {OrderDto} [order] 
          * @param {*} [options] Override http request option.
@@ -309,6 +357,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, fetch?
         },
         /**
          * 
+         * @summary Get an order
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ordersIdGet(id: number, options?: any) {
+            return DefaultApiFp(configuration).ordersIdGet(id, options)(fetch, basePath);
+        },
+        /**
+         * 
          * @summary Place an order
          * @param {OrderDto} [order] 
          * @param {*} [options] Override http request option.
@@ -345,6 +403,18 @@ export class DefaultApi extends BaseAPI {
      */
     public ordersGet(options?: any) {
         return DefaultApiFp(this.configuration).ordersGet(options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get an order
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public ordersIdGet(id: number, options?: any) {
+        return DefaultApiFp(this.configuration).ordersIdGet(id, options)(this.fetch, this.basePath);
     }
 
     /**

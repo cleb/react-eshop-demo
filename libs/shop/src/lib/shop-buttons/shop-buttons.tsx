@@ -13,7 +13,7 @@ export function ShopButtons(props: ShopButtonsProps) {
   const [amount, setAmount] = useState(0);
   const { product, addToBasket } = props;
   const onChange = (event) => {
-    setAmount(event.target.value);
+    setAmount(parseInt(event.target.value));
   };
   const add = (event) => addToBasket(product, amount);
 

@@ -37,7 +37,12 @@ export function ShopPage(props: ShopPageProps) {
         Products in basket:{' '}
         {basket.reduce((carry, value) => carry + value.amount, 0)}
       </h3>
-      <button onClick={placeOrderClick}>Place order</button>
+      <button
+        disabled={basket.length === 0 ? true : null}
+        onClick={placeOrderClick}
+      >
+        Place order
+      </button>
     </>
   );
 }

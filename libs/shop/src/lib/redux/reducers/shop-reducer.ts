@@ -45,6 +45,11 @@ export function shopReducer(
           )
           .concat([(action as LoadOrderSuccessAction).order]),
       };
+    case ShopActionTypes.PLACE_ORDER_SUCCESS:
+      return {
+        ...state,
+        basket: [],
+      };
     default:
       return state;
   }

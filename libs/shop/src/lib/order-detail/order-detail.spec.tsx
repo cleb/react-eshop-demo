@@ -1,11 +1,16 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { MemoryRouter as Router } from 'react-router-dom';
 
-import OrderDetail from './order-detail';
+import { OrderDetailComponent } from './order-detail';
 
-describe('OrderDetail', () => {
+describe('OrderDetailComponent', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<OrderDetail />);
+    const { baseElement } = render(
+      <Router>
+        <OrderDetailComponent orders={[]} loadOrder={() => {}} />
+      </Router>
+    );
     expect(baseElement).toBeTruthy();
   });
 });

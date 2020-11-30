@@ -13,12 +13,26 @@ describe('ShopPage', () => {
   };
   const mockProducts = [mockProduct];
   it('should render successfully', () => {
-    const { baseElement } = render(<ShopPage products={mockProducts} />);
+    const { baseElement } = render(
+      <ShopPage
+        basket={[]}
+        addToBasket={(item) => {}}
+        placeOrder={(order) => {}}
+        products={mockProducts}
+      />
+    );
     expect(baseElement).toBeTruthy();
   });
 
   it('should show products', () => {
-    const { getByText } = render(<ShopPage products={mockProducts} />);
+    const { getByText } = render(
+      <ShopPage
+        basket={[]}
+        addToBasket={(item) => {}}
+        placeOrder={(order) => {}}
+        products={mockProducts}
+      />
+    );
 
     const product = getByText('Test Product');
 

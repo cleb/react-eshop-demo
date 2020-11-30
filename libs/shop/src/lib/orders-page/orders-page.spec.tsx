@@ -5,7 +5,7 @@ import OrdersPage from './orders-page';
 
 describe('OrdersPage', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<OrdersPage />);
+    const { baseElement } = render(<OrdersPage orders={[]} />);
     expect(baseElement).toBeTruthy();
   });
 });

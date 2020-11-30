@@ -12,7 +12,7 @@ export interface OrdersProps {
   orders: Array<Order>;
 }
 
-function OrdersComponent(props: OrdersProps) {
+export function OrdersComponent(props: OrdersProps) {
   const { loadOrders, orders } = props;
   useEffect(() => {
     loadOrders();

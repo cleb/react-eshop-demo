@@ -1,11 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import Orders from './orders';
+import { OrdersComponent } from './orders';
 
 describe('Orders', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Orders />);
+    const { baseElement } = render(
+      <OrdersComponent orders={[]} loadOrders={() => {}} />
+    );
     expect(baseElement).toBeTruthy();
   });
 });

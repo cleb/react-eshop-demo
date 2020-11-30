@@ -1,7 +1,7 @@
 import React from 'react';
 import { TopBar } from '@react-eshop-demo/ui';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Shop } from '@react-eshop-demo/shop';
+import { Orders, Shop } from '@react-eshop-demo/shop';
 
 import './app.scss';
 
@@ -21,8 +21,11 @@ export function App() {
         <Route path="/shop">
           <Shop />
         </Route>
+        <Route path="/orders">
+          <Orders />
+        </Route>
         <Route path="/">
-          <Link to="/shop">Shop</Link>
+          <Link to="/shop">Shop</Link> | <Link to="/orders">Orders</Link>
         </Route>
       </Switch>
     </Router>

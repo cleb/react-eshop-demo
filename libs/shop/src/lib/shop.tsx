@@ -23,9 +23,10 @@ export interface ShopProps {
 }
 
 export function ShopComponent(props: ShopProps) {
+  const { loadAllProducts } = props;
   useEffect(() => {
-    props.loadAllProducts();
-  }, []);
+    loadAllProducts();
+  }, [loadAllProducts]);
 
   const products = props.products ?? [];
   const { addToBasket, basket, placeOrder } = props;

@@ -2,6 +2,7 @@ import { Product } from '@react-eshop-demo/product';
 import { Action } from 'redux';
 import { DefaultApi, OrderDto } from '@react-eshop-demo/api';
 import { ProductInBasket } from '../state/product-in-basket';
+import { Order } from '../state/shop-state';
 
 const api = new DefaultApi();
 
@@ -11,6 +12,8 @@ export enum ShopActionTypes {
   ADD_TO_BASKET = 'ADD_TO_BASKET',
   PLACE_ORDER = 'PLACE_ORDER',
   PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS',
+  LOAD_ORDERS = 'LOAD_ORDERS',
+  LOAD_ORDERS_SUCCESS = 'LOAD_ORDERS_SUCCESS',
 }
 
 export interface LoadProductsSuccessAction extends Action {
@@ -26,12 +29,24 @@ export interface PlaceOrderAction extends Action {
   basket: Array<ProductInBasket>;
 }
 
+export interface LoadOrdersSuccessAction extends Action {
+  orders: Array<Order>;
+}
+
 type PlaceOrderSuccessAction = Action;
 
 export function loadProducts() {
   return (dispatch) => {
     api.productsGet().then((res) => {
       dispatch(loadProductsSuccess(res));
+    });
+  };
+}
+
+export function loadOrders() {
+  return (dispatch) => {
+    api.ordersGet().then((res) => {
+      dispatch(loadOrdersSuccess(res));
     });
   };
 }
@@ -48,6 +63,13 @@ export function loadProductsSuccess(products): LoadProductsSuccessAction {
   return {
     type: ShopActionTypes.LOAD_PRODUCTS_SUCCESS,
     products: products,
+  };
+}
+
+export function loadOrdersSuccess(orders): LoadOrdersSuccessAction {
+  return {
+    type: ShopActionTypes.LOAD_ORDERS_SUCCESS,
+    orders: orders,
   };
 }
 

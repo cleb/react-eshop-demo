@@ -1,9 +1,11 @@
-import ShopState, { ProductInBasket } from '../state/shop-state';
+import ShopState from '../state/shop-state';
+import { ProductInBasket } from '../state/ProductInBasket';
 import {
   ShopAction,
   ShopActionTypes,
   LoadProductsSuccessAction,
   AddToBasketAction,
+  LoadOrdersSuccessAction,
 } from '../actions/shop-actions';
 
 export function shopReducer(
@@ -26,6 +28,11 @@ export function shopReducer(
             amount: (action as AddToBasketAction).amount,
           },
         ],
+      };
+    case ShopActionTypes.LOAD_ORDERS_SUCCESS:
+      return {
+        ...state,
+        orders: (action as LoadOrdersSuccessAction).orders,
       };
     default:
       return state;

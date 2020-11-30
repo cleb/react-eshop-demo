@@ -32,6 +32,15 @@ paths:
           description: 'Order Created'
           schema:
             $ref: '#/definitions/OrderDto'
+    get:
+      summary: Get a list of orders
+      responses:
+        '200':
+          description: 'Get all orders success'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OrderDto'
 
 host: localhost:3333
 schemes:

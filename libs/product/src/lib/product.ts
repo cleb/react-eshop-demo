@@ -1,7 +1,7 @@
 export interface Product {
   name: string;
   id: number;
-  icon: string;
+  icon?: string;
   description: string;
 }
 

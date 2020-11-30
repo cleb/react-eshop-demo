@@ -22,7 +22,6 @@ export function App() {
           <Shop />
         </Route>
         <Route path="/">
-          <Link to="/">Home</Link>
           <Link to="/shop">Shop</Link>
         </Route>
       </Switch>

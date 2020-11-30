@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/libs/shop',
     '<rootDir>/libs/product',
     '<rootDir>/apps/eshop-api',
+    '<rootDir>/libs/api',
   ],
 };

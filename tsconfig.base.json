@@ -18,7 +18,8 @@
     "paths": {
       "@react-eshop-demo/ui": ["libs/ui/src/index.ts"],
       "@react-eshop-demo/shop": ["libs/shop/src/index.ts"],
-      "@react-eshop-demo/product": ["libs/product/src/index.ts"]
+      "@react-eshop-demo/product": ["libs/product/src/index.ts"],
+      "@react-eshop-demo/api": ["libs/api/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

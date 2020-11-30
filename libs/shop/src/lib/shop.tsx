@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './shop.scss';
 import ShopPage from './shop-page/shop-page';
 import ShopState, { ShopStateSlice } from './redux/state/shop-state';
-import { loadProductsSuccess } from './redux/actions/shop-actions';
+import { loadProducts } from './redux/actions/shop-actions';
 
 /* eslint-disable-next-line */
 export interface ShopProps {
@@ -30,7 +30,7 @@ function mapStateToProps(state: ShopStateSlice) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadAllProducts: () => dispatch(loadProductsSuccess()),
+    loadAllProducts: () => dispatch(loadProducts()),
   };
 }
 

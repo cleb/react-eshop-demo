@@ -13,11 +13,17 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/Product'
+              $ref: '#/definitions/ProductDto'
+            default:
+              items:
+                name: 'Test 1'
+                id: 1
+                description: 'Lorem ipsum dolor sit amet'
 
-# Added by API Auto Mocking Plugin
+schemes:
+  - https
 definitions:
-  Product:
+  ProductDto:
     type: object
     properties:
       id:

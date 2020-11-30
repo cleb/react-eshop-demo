@@ -1,5 +1,6 @@
-import { OrderDto } from 'libs/api/api';
+import { OrderDto } from '@react-eshop-demo/api';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './orders-page.scss';
 
@@ -13,7 +14,10 @@ export function OrdersPage(props: OrdersPageProps) {
   return (
     <ul>
       {orders.map((order) => (
-        <li>Order: items: {order.items.length}</li>
+        <li key={order.id}>
+          Order: items: {order.items.length}{' '}
+          <Link to={`/orders/${order.id}`}>Detail</Link>
+        </li>
       ))}
     </ul>
   );

@@ -81,6 +81,32 @@ export class RequiredError extends Error {
 /**
  * 
  * @export
+ * @interface CustomerDto
+ */
+export interface CustomerDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CustomerDto
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerDto
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerDto
+     */
+    address?: string;
+}
+
+/**
+ * 
+ * @export
  * @interface OrderDto
  */
 export interface OrderDto {
@@ -151,6 +177,34 @@ export interface ProductInBasketDto {
  */
 export const DefaultApiFetchParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @summary Register a customer
+         * @param {CustomerDto} [order] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customersPost(order?: CustomerDto, options: any = {}): FetchArgs {
+            const localVarPath = `/customers`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"CustomerDto" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body =  needsSerialization ? JSON.stringify(order || {}) : (order || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary Get a list of orders
@@ -265,6 +319,25 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Register a customer
+         * @param {CustomerDto} [order] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customersPost(order?: CustomerDto, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<CustomerDto> {
+            const localVarFetchArgs = DefaultApiFetchParamCreator(configuration).customersPost(order, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
          * @summary Get a list of orders
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -348,6 +421,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, fetch?
     return {
         /**
          * 
+         * @summary Register a customer
+         * @param {CustomerDto} [order] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customersPost(order?: CustomerDto, options?: any) {
+            return DefaultApiFp(configuration).customersPost(order, options)(fetch, basePath);
+        },
+        /**
+         * 
          * @summary Get a list of orders
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -394,6 +477,18 @@ export const DefaultApiFactory = function (configuration?: Configuration, fetch?
  * @extends {BaseAPI}
  */
 export class DefaultApi extends BaseAPI {
+    /**
+     * 
+     * @summary Register a customer
+     * @param {CustomerDto} [order] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public customersPost(order?: CustomerDto, options?: any) {
+        return DefaultApiFp(this.configuration).customersPost(order, options)(this.fetch, this.basePath);
+    }
+
     /**
      * 
      * @summary Get a list of orders

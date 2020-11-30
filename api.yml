@@ -55,6 +55,20 @@ paths:
           schema:
             $ref: '#/definitions/OrderDto'
 
+  /customers:
+    post:
+      summary: Register a customer
+      parameters:
+        - in: body
+          name: order
+          schema:
+            $ref: '#/definitions/CustomerDto'
+      responses:
+        '200':
+          description: 'Customer registered'
+          schema:
+            $ref: '#/definitions/CustomerDto'
+
 host: localhost:3333
 schemes:
   - http
@@ -87,3 +101,13 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/ProductInBasketDto'
+  CustomerDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      address:
+        type: string
